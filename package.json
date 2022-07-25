@@ -13,7 +13,7 @@
     "build": "tsc",
     "all": "npm run lint && npm run build && npm run test",
     "prepare": "husky install",
-    "start": "npm run build && node ./dist/app.js"
+    "start": "node ./dist/app.js"
   },
   "lint-staged": {
     "*.(ts|js)": [
