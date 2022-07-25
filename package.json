@@ -2,14 +2,18 @@
   "name": "classroom-clerk",
   "version": "1.0.0",
   "description": "Administer Classroom for git/github project based class",
-  "main": "app.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "main": "./dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon dist/app.js",
     "lint": "eslint  --fix . && prettier --write .",
     "build": "tsc",
     "all": "npm run lint && npm run build && npm run test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "web": "node dist/app.js"
   },
   "lint-staged": {
     "*.(ts|js)": [

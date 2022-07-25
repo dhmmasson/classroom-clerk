@@ -4,7 +4,7 @@ Administrate classroom for git/github based project
 
 # DEV NOTES
 
-I installed
+## Boiler plate Installation process
 
 ```bash
 npm init
@@ -55,3 +55,5 @@ npm -S install dotenv express
 ```bash
 npm run dev &
 ```
+
+in vscode `cmd + shift + b` then `tsc: watch`
