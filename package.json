@@ -13,14 +13,16 @@
     "build": "tsc",
     "all": "npm run lint && npm run build && npm run test",
     "prepare": "husky install",
-    "start": "node ./dist/app.js"
+    "student-desk": "node dist/startup-script/start-student-desk.js",
+    "api": "node dist/server/api.js",
+    "start": "concurrently \"npm run api\" \"npm run student-desk\""
   },
   "lint-staged": {
-    "*.(ts|js)": [
+    "*.(ts|js|tsx)": [
       "eslint --fix .",
       "prettier --config  --write"
     ],
-    "*.!(ts|js)": [
+    "*.(json|html|css|md)": [
       "prettier --write"
     ]
   },
@@ -39,6 +41,7 @@
   },
   "homepage": "https://github.com/dhmmasson/classroom-clerk#readme",
   "dependencies": {
+    "concurrently": "^7.3.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1"
   },
