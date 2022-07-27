@@ -5,25 +5,24 @@
   "engines": {
     "node": "16.x"
   },
-  "main": "./dist/app.js",
+  "main": "./server/src/api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon dist/app.js",
-    "lint": "eslint  --fix . && prettier --write .",
-    "build": "tsc",
-    "all": "npm run lint && npm run build && npm run test",
-    "prepare": "husky install",
-    "student-desk": "node dist/startup-script/start-student-desk.js",
-    "api": "node dist/server/api.js",
+    "dev": "nodemon server/dist/api.js",
+    "lint": "eslint --fix . && prettier --write . && eslint --fix .",
+    "build": "tsc --build",
+    "student-desk": "node ./scripts/start-student-desk.js",
+    "api": "node ./scripts/start-server.js",
     "start": "concurrently \"npm run api\" \"npm run student-desk\""
   },
   "lint-staged": {
     "*.(ts|js|tsx)": [
-      "eslint --fix .",
-      "prettier --config  --write"
+      "eslint --fix ",
+      "prettier --write ",
+      "eslint --fix."
     ],
     "*.(json|html|css|md)": [
-      "prettier --write"
+      "prettier --write ."
     ]
   },
   "repository": {
@@ -51,12 +50,14 @@
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "eslint": "^8.20.0",
+    "eslint-config-standard": "^17.0.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
     "prettier-config-standard": "^5.0.0",
+    "ts-standard": "^11.0.0",
     "typescript": "^4.7.4"
   }
 }
