@@ -1,0 +1,9 @@
+{
+  "include": ["./src/*"],
+  "extends": "../tsconfig.settings.json",
+  "compilerOptions": {
+    "outDir": "./dist/" /* Specify an output folder for all emitted files. */,
+    "rootDir": "./src" /* Specify the root directory of input files. */,
+    "strictNullChecks": true /* Enable strict null checks. */
+  }
+}

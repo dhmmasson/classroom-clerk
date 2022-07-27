@@ -1,0 +1,5 @@
+{
+  // extend your base config so you don't have to redefine your compilerOptions
+  "extends": "./tsconfig.settings.json",
+  "include": ["server/src/*.ts", "clients/**/src/*.ts", "clients/**/src/*.tsx"]
+}
