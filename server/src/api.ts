@@ -11,7 +11,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.get('/api/helloworld', (req: Request, res: Response) => {
-  res.json({ message: 'Hello World!' })
+  res.json({ message: 'Welcome to the student desk' })
 })
 
 app.listen(port, () => {
