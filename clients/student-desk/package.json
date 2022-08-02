@@ -66,7 +66,10 @@
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1",
-    "react-dev-utils": "^12.0.1"
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-plugin-transform-react-pug": "^7.0.1",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-react-pug": "^0.8.4"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -166,12 +169,7 @@
       "transform-react-jsx"
     ]
   },
-  "devDependencies": {
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-react-pug": "^7.0.1",
-    "eslint-config-standard-with-typescript": "^22.0.0",
-    "eslint-plugin-react-pug": "^0.8.4"
-  },
+  "devDependencies": {},
   "lint-staged": {
     "*.(ts|js|tsx)": [
       "eslint --fix ",
