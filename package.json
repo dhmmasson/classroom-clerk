@@ -8,7 +8,7 @@
   "main": "./server/src/api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server/dist/api.js",
+    "dev": "concurrently \"cd server ; npx tsc --watch\"  \"nodemon ./scripts/start-server.js\" \"npm run student-desk\"",
     "lint": "eslint --fix . && prettier --write . && eslint --fix .",
     "build": "tsc --build",
     "student-desk": "node ./scripts/start-student-desk.js",
