@@ -4,6 +4,10 @@ Administrate classroom for git/github based project
 
 # DEV NOTES
 
+## Auth0
+
+github integration, tenant id is domain.region.auth0.com/login/callback
+
 ## Boiler plate Installation process
 
 ```bash

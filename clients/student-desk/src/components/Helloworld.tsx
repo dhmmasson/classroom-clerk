@@ -1,4 +1,6 @@
 import React from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+
 React // eslint-disable-line @typescript-eslint/no-unused-expressions
 declare const pug: any
 
@@ -20,7 +22,8 @@ class HelloWorld extends React.Component {
 
   render (): any {
     return pug`
-      h1= this.state.message
+      .row 
+        h1.col.m6.offset-m3= this.state.message
       `
   }
 }
