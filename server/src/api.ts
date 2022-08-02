@@ -11,7 +11,9 @@ const port = '3001'
 apiServer.get('/', (req: Request, res: Response) => {
   // if production redirect to student-desk/
   if (process.env.NODE_ENV === 'production') {
-    res.redirect(`http://localhost:${process.env.PORT ?? 8000}/student-desk/`)
+    res.redirect(
+      `http://${req.hostname}:${process.env.PORT ?? 8000}/student-desk/`
+    )
   } else {
     // redirect to port 3001
     res.redirect(`http://localhost:${process.env.PORT ?? 8000}`)
