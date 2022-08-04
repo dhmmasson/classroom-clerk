@@ -6,17 +6,16 @@ dotenv.config()
 
 // Placeholder for the API... should move to its own
 const apiServer: Express = express()
-const port = '3001'
+const apiPort = '3001'
+const clientPort = process.env.PORT ?? '8000'
 
 apiServer.get('/', (req: Request, res: Response) => {
   // if production redirect to student-desk/
   if (process.env.NODE_ENV === 'production') {
-    res.redirect(
-      `http://${req.hostname}:${process.env.PORT ?? 8000}/student-desk/`
-    )
+    res.redirect(`http://${req.hostname}:${clientPort}/student-desk/`)
   } else {
     // redirect to port 3001
-    res.redirect(`http://localhost:${process.env.PORT ?? 8000}`)
+    res.redirect(`http://localhost:${clientPort}`)
   }
 })
 
@@ -24,11 +23,11 @@ apiServer.get('/api/helloworld', (req: Request, res: Response) => {
   res.json({ message: 'Welcome to the student desk' })
 })
 
-apiServer.listen(port, () => {
+apiServer.listen(apiPort, () => {
   console.log(
     `⚡️[server]: Server is running in ${
       process.env.NODE_ENV ?? 'dev'
-    } mode at https://localhost:${port}`
+    } mode at https://localhost:${apiPort}`
   )
 })
 
@@ -45,11 +44,9 @@ if (process.env.NODE_ENV === 'production') {
   studentDesk.get('/student-desk/', (req: Request, res: Response) => {
     res.sendFile(resolve(studentDeskPath, 'index.html'))
   })
-  studentDesk.listen(8000, () => {
+  studentDesk.listen(clientPort, () => {
     console.log(
-      `⚡️[student-desk]: Server is running at https://localhost:${
-        process.env.PORT ?? 8800
-      }`
+      `⚡️[student-desk]: Server is running at https://localhost:${clientPort}`
     )
   })
 }

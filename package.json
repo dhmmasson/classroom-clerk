@@ -13,13 +13,13 @@
     "build": "scripts/build.sh",
     "student-desk": "node ./scripts/start-student-desk.js",
     "api": "node ./scripts/start-server.js",
-    "start": "npm run student-desk"
+    "start": "node ./server/dist/api.js"
   },
   "lint-staged": {
     "*.(ts|js|tsx)": [
       "eslint --fix ",
       "prettier --write ",
-      "eslint --fix."
+      "eslint --fix"
     ],
     "*.(json|html|css|md)": [
       "prettier --write ."
