@@ -21,6 +21,19 @@ apiServer.get('/api/helloworld', (req: Request, res: Response) => {
 
 // Client
 apiServer.use('/student-desk', express.static(resolve(studentDeskPath)))
+apiServer.get(
+  '/.well-known/microsoft-identity-association.json',
+  (req: Request, res: Response) => {
+    res.sendFile(
+      resolve(
+        studentDeskPath,
+        'static',
+        '.well-known',
+        'microsoft-identity-association.json'
+      )
+    )
+  }
+)
 apiServer.get('/student-desk/', (req: Request, res: Response) => {
   res.sendFile(resolve(studentDeskPath, 'index.html'))
 })
