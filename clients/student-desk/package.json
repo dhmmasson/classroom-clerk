@@ -174,7 +174,7 @@
     "*.(ts|js|tsx)": [
       "eslint --fix ",
       "prettier --write ",
-      "eslint --fix."
+      "eslint --fix"
     ],
     "*.(json|html|css|md)": [
       "prettier --write ."

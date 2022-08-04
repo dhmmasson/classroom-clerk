@@ -6,47 +6,31 @@ dotenv.config()
 
 // Placeholder for the API... should move to its own
 const apiServer: Express = express()
-const apiPort = '3001'
-const clientPort = process.env.PORT ?? '8000'
+const port = process.env.PORT ?? '3001'
+const studentDeskPath = 'clients/student-desk/build/'
 
+// Redirect to student desk if access to root
 apiServer.get('/', (req: Request, res: Response) => {
-  // if production redirect to student-desk/
-  if (process.env.NODE_ENV === 'production') {
-    res.redirect(`http://${req.hostname}:${clientPort}/student-desk/`)
-  } else {
-    // redirect to port 3001
-    res.redirect(`http://localhost:${clientPort}`)
-  }
+  res.redirect(`http://${req.hostname}:${port}/student-desk/`)
 })
 
+// API
 apiServer.get('/api/helloworld', (req: Request, res: Response) => {
   res.json({ message: 'Welcome to the student desk' })
 })
 
-apiServer.listen(apiPort, () => {
+// Client
+apiServer.use('/student-desk', express.static(resolve(studentDeskPath)))
+apiServer.get('/student-desk/', (req: Request, res: Response) => {
+  res.sendFile(resolve(studentDeskPath, 'index.html'))
+})
+
+apiServer.use(morgan('dev'))
+
+apiServer.listen(port, () => {
   console.log(
     `⚡️[server]: Server is running in ${
       process.env.NODE_ENV ?? 'dev'
-    } mode at https://localhost:${apiPort}`
+    } mode at https://localhost:${port}`
   )
 })
-
-if (process.env.NODE_ENV === 'production') {
-  // serve static assets from clients/student-desk/
-  const studentDeskPath = 'clients/student-desk/build/'
-  const studentDesk: Express = express()
-  studentDesk.use(morgan('dev'))
-  console.log(
-    '⚡️[server]: Serving static assets from',
-    resolve(studentDeskPath)
-  )
-  studentDesk.use('/student-desk', express.static(resolve(studentDeskPath)))
-  studentDesk.get('/student-desk/', (req: Request, res: Response) => {
-    res.sendFile(resolve(studentDeskPath, 'index.html'))
-  })
-  studentDesk.listen(clientPort, () => {
-    console.log(
-      `⚡️[student-desk]: Server is running at https://localhost:${clientPort}`
-    )
-  })
-}
