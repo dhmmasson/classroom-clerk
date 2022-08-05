@@ -5,6 +5,12 @@ React // eslint-disable-line @typescript-eslint/no-unused-expressions
 
 declare const pug: any
 
+interface fetchParameter {
+  url: string
+  method: string
+  body: object | undefined
+}
+
 class HelloWorld extends Component<WithAuth0Props> {
   state = {
     message: 'Waiting for message...'
@@ -19,6 +25,37 @@ class HelloWorld extends Component<WithAuth0Props> {
     const data = await response.json()
     this.setState({ message: data.message })
     return data.message
+  }
+
+  async secureFetchCall ({
+    url = window.location.origin,
+    method = 'get',
+    body = {}
+  }: fetchParameter): Promise<any> {
+    const { getAccessTokenSilently } = this.props.auth0
+    const auth0Params = {
+      audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+      scope: process.env.REACT_APP_AUTH0_SCOPE
+    }
+
+    try {
+      const token = await getAccessTokenSilently({
+        audience: auth0Params.audience,
+        scope: auth0Params.scope
+      })
+
+      const res = await fetch(url, {
+        method,
+        body: method !== 'get' ? JSON.stringify(body) : null,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      const data = await res.json()
+      return data
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   render (): any {
