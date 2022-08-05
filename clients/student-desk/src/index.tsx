@@ -17,7 +17,7 @@ root.render(
         'https://classroom-clerk.herokuapp.com/api/students'
       }
       scope="openid profile email"
-      redirectUri={join(window.location.origin, 'student-desk')}>
+      redirectUri={window.location.origin + '/student-desk'}>
       <App />
     </Auth0Provider>
   </React.StrictMode>
